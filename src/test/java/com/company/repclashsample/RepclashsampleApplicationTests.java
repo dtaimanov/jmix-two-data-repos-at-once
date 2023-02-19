@@ -2,52 +2,54 @@ package com.company.repclashsample;
 
 import com.company.repclashsample.entity.Sample;
 import com.company.repclashsample.plainrepo.JpaSampleRepo;
-import com.company.repclashsample.repo.JmixSampleRepo;
-import io.jmix.core.security.Authenticated;
-import org.junit.jupiter.api.*;
+import io.jmix.core.UnconstrainedDataManager;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.stream.Collectors;
 
 @SpringBootTest
 class RepclashsampleApplicationTests {
 
-    @Autowired
-    protected JmixSampleRepo jmixSampleRepo;
+    //@Autowired
+    //protected JmixSampleRepo jmixSampleRepo;
 
     @Autowired
     protected JpaSampleRepo jpaSampleRepo;
 
+    @Autowired
+    protected UnconstrainedDataManager dataManager;
+
     @BeforeEach
     void createTestData() {
-        Sample sample = jmixSampleRepo.create();
+        Sample sample = dataManager.create(Sample.class);
         sample.setName("test111");
-        jmixSampleRepo.save(sample);
+        dataManager.save(sample);
 
-        sample = jmixSampleRepo.create();
+        sample = dataManager.create(Sample.class);
         sample.setName("test222");
-        jmixSampleRepo.save(sample);
+        dataManager.save(sample);
 
-        sample = jmixSampleRepo.create();
+        sample = dataManager.create(Sample.class);
         sample.setName("sample111");
-        jmixSampleRepo.save(sample);
+        dataManager.save(sample);
 
-        sample = jmixSampleRepo.create();
+        sample = dataManager.create(Sample.class);
         sample.setName("sample222");
-        jmixSampleRepo.save(sample);
+        dataManager.save(sample);
 
     }
 
     @Test
     void contextLoads() {
-        System.out.println("Jmix repo entities count: " + jmixSampleRepo.count());
+        //System.out.println("Jmix repo entities count: " + jmixSampleRepo.count());
         System.out.println("Jpa repo entities count: " + jpaSampleRepo.count());
     }
 
     @AfterEach
     void clearTestData() {
-        jmixSampleRepo.deleteAll();
+        jpaSampleRepo.deleteAll();//wrong usage because jmix mechanisms will not be triggered, but it is ok for particular "Sample" entity
     }
 
 }
