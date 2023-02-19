@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://jmix.io/schema/ui/menu">
+
+    <menu id="application" caption="msg://com.company.repclashsample/menu.application" insertBefore="administration">
+        <item screen="User.browse" caption="msg://com.company.repclashsample.screen.user/UserBrowse.caption"/>
+        <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
+        <item screen="Sample.browse" caption="msg://com.company.repclashsample.screen.sample/sampleBrowse.menu"/>
+    </menu>
+
+</menu-config>
